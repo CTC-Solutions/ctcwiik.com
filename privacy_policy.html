@@ -1,0 +1,397 @@
+<!DOCTYPE html>
+<html lang="sv">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Integritetspolicy — Dvala</title>
+  <meta name="description" content="Integritetspolicy för Dvala-appen av CTC Solutions AB.">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg:          #000000;
+      --surface:     #1A1A1A;
+      --border:      #2A2A2A;
+      --cream:       #F5F1EB;
+      --cream-dim:   #8A8A8A;
+      --gold:        #D4A843;
+      --gold-soft:   #3D2E14;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--bg);
+      color: var(--cream);
+      font-family: -apple-system, BlinkMacSystemFont, 'Helvetica Neue', sans-serif;
+      font-size: 16px;
+      line-height: 1.75;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* ── Header ── */
+    header {
+      border-bottom: 1px solid var(--border);
+      padding: 28px 0;
+    }
+    .header-inner {
+      max-width: 720px;
+      margin: 0 auto;
+      padding: 0 24px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      text-decoration: none;
+    }
+    .logo-moon {
+      width: 32px;
+      height: 32px;
+      background: var(--gold-soft);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 16px;
+    }
+    .logo-name {
+      font-size: 18px;
+      font-weight: 600;
+      color: var(--cream);
+      letter-spacing: -0.3px;
+    }
+    .back-link {
+      font-size: 14px;
+      color: var(--cream-dim);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+    .back-link:hover { color: var(--cream); }
+
+    /* ── Main content ── */
+    main {
+      max-width: 720px;
+      margin: 0 auto;
+      padding: 64px 24px 96px;
+    }
+
+    .doc-header {
+      margin-bottom: 56px;
+      padding-bottom: 40px;
+      border-bottom: 1px solid var(--border);
+    }
+    .doc-header h1 {
+      font-size: clamp(28px, 5vw, 40px);
+      font-weight: 700;
+      letter-spacing: -0.8px;
+      color: var(--cream);
+      margin-bottom: 16px;
+      line-height: 1.2;
+    }
+    .doc-meta {
+      display: flex;
+      gap: 24px;
+      flex-wrap: wrap;
+    }
+    .doc-meta span {
+      font-size: 13px;
+      color: var(--cream-dim);
+    }
+    .doc-meta span strong {
+      color: var(--cream);
+      font-weight: 500;
+    }
+
+    /* ── Sections ── */
+    section {
+      margin-bottom: 52px;
+    }
+    h2 {
+      font-size: 20px;
+      font-weight: 600;
+      color: var(--cream);
+      letter-spacing: -0.3px;
+      margin-bottom: 16px;
+      padding-bottom: 12px;
+      border-bottom: 1px solid var(--border);
+    }
+    p {
+      color: var(--cream);
+      margin-bottom: 16px;
+      opacity: 0.85;
+    }
+    p:last-child { margin-bottom: 0; }
+
+    ul {
+      margin: 12px 0 16px 0;
+      padding-left: 0;
+      list-style: none;
+    }
+    ul li {
+      position: relative;
+      padding-left: 20px;
+      margin-bottom: 10px;
+      opacity: 0.85;
+      color: var(--cream);
+    }
+    ul li::before {
+      content: '—';
+      position: absolute;
+      left: 0;
+      color: var(--gold);
+      font-size: 12px;
+      top: 4px;
+    }
+
+    /* ── Highlight box ── */
+    .highlight {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-left: 3px solid var(--gold);
+      border-radius: 8px;
+      padding: 20px 24px;
+      margin: 24px 0;
+    }
+    .highlight p {
+      margin: 0;
+      font-size: 15px;
+      opacity: 1;
+    }
+
+    /* ── Contact card ── */
+    .contact-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 28px;
+      margin-top: 16px;
+    }
+    .contact-card p {
+      margin-bottom: 8px;
+      opacity: 1;
+      font-size: 15px;
+    }
+    .contact-card a {
+      color: var(--gold);
+      text-decoration: none;
+    }
+    .contact-card a:hover {
+      text-decoration: underline;
+    }
+
+    /* ── Footer ── */
+    footer {
+      border-top: 1px solid var(--border);
+      padding: 32px 24px;
+      text-align: center;
+    }
+    footer p {
+      font-size: 13px;
+      color: var(--cream-dim);
+      opacity: 1;
+      margin: 0;
+    }
+    footer a {
+      color: var(--cream-dim);
+      text-decoration: none;
+    }
+    footer a:hover { color: var(--cream); }
+
+    @media (max-width: 480px) {
+      main { padding: 40px 20px 64px; }
+      .doc-header { margin-bottom: 40px; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Header -->
+  <header>
+    <div class="header-inner">
+      <a href="https://ctcwiik.com" class="logo">
+        <div class="logo-moon">🌙</div>
+        <span class="logo-name">Dvala</span>
+      </a>
+      <a href="https://ctcwiik.com" class="back-link">← ctcwiik.com</a>
+    </div>
+  </header>
+
+  <!-- Main -->
+  <main>
+
+    <div class="doc-header">
+      <h1>Integritetspolicy</h1>
+      <div class="doc-meta">
+        <span><strong>App:</strong> Dvala</span>
+        <span><strong>Utgivare:</strong> CTC Solutions AB</span>
+        <span><strong>Senast uppdaterad:</strong> Februari 2026</span>
+        <span><strong>Gäller från:</strong> Version 1.0</span>
+      </div>
+    </div>
+
+    <div class="highlight">
+      <p>Dvala samlar inte in, säljer eller delar personuppgifter med tredje part. Den här policyn förklarar vad som lagras lokalt på din enhet och varför.</p>
+    </div>
+
+    <!-- 1 -->
+    <section>
+      <h2>1. Personuppgiftsansvarig</h2>
+      <p>
+        Dvala-appen utvecklas och underhålls av CTC Solutions AB, ett svenskt aktiebolag.
+        Frågor om integritet riktas till <a href="mailto:rasmus@ctcwiik.com" style="color:var(--gold)">rasmus@ctcwiik.com</a>.
+      </p>
+    </section>
+
+    <!-- 2 -->
+    <section>
+      <h2>2. Vilken data samlar vi in?</h2>
+      <p>Dvala är utformad för att samla in så lite data som möjligt. Vi samlar <strong>inte</strong> in:</p>
+      <ul>
+        <li>Namn, e-postadress eller kontaktuppgifter</li>
+        <li>Platsdata (GPS eller nätverksbaserad)</li>
+        <li>Hälso- eller träningsdata</li>
+        <li>Kontakter, foton eller mediafiler</li>
+        <li>Enhets-ID eller reklamidentifierare (IDFA)</li>
+        <li>Användarbeteende eller analysdata till externa tjänster</li>
+      </ul>
+
+      <p>Följande data lagras <strong>enbart lokalt på din enhet</strong> via iOS UserDefaults och lämnar aldrig din telefon:</p>
+      <ul>
+        <li>Vilka berättelser du markerat som favoriter</li>
+        <li>Din uppspelningsposition i en berättelse</li>
+        <li>Inställningar för sömntiimer och påminnelser</li>
+        <li>Om du genomfört introduktionsflödet</li>
+      </ul>
+    </section>
+
+    <!-- 3 -->
+    <section>
+      <h2>3. Prenumerationer och köp</h2>
+      <p>
+        Betalningar för Dvala Premium hanteras uteslutande av Apple via App Store och StoreKit.
+        CTC Solutions AB ser aldrig dina betalkortsuppgifter, ditt Apple-ID eller din transaktionshistorik.
+        Apples sekretesspolicy gäller för all betalningshantering: <a href="https://www.apple.com/legal/privacy/sv/" style="color:var(--gold)" target="_blank" rel="noopener">apple.com/legal/privacy</a>.
+      </p>
+      <p>
+        Om du återställer ett köp via "Återställ köp"-funktionen i appen kommunicerar appen
+        med Apples servrar för att verifiera ditt köp. Ingen data lagras av oss i denna process.
+      </p>
+    </section>
+
+    <!-- 4 -->
+    <section>
+      <h2>4. Notifikationer</h2>
+      <p>
+        Om du aktiverar läggdagspåminnelsen ber appen om tillåtelse att skicka lokala notifikationer.
+        Dessa schemaläggs lokalt på din enhet — ingen data skickas till externa servrar.
+        Du kan när som helst stänga av notifikationer i iOS Inställningar → Notifikationer → Dvala.
+      </p>
+    </section>
+
+    <!-- 5 -->
+    <section>
+      <h2>5. Ljud och upphovsrätt</h2>
+      <p>
+        Allt ljudinnehåll i Dvala (berättelser och ambient bakgrundsljud) ingår i appens paket eller
+        hämtas från CTC Solutions ABs egna servrar. Inga tredjepartstjänster för streaming används i MVP-versionen.
+        Vi samlar inte in information om vad du lyssnar på eller hur länge.
+      </p>
+    </section>
+
+    <!-- 6 -->
+    <section>
+      <h2>6. Barn</h2>
+      <p>
+        Dvala är avsedd för användare från 4 år och uppåt (App Store-klassificering 4+).
+        Vi samlar medvetet in noll personuppgifter, vilket gör appen lämplig för alla åldrar.
+        Vi riktar oss inte specifikt till barn under 13 år och genomför inga riktade åtgärder
+        mot denna grupp.
+      </p>
+    </section>
+
+    <!-- 7 -->
+    <section>
+      <h2>7. Tredjepartstjänster</h2>
+      <p>Dvala v1.0 innehåller inga tredjepartsbibliotek, SDK:er eller analyslösningar. Appen innehåller specifikt inte:</p>
+      <ul>
+        <li>Google Analytics, Firebase eller liknande analyslösningar</li>
+        <li>Facebook SDK eller sociala inloggningar</li>
+        <li>Reklamnätverk eller spårningspixlar</li>
+        <li>Crashlyticsliknande kraschrapporteringstjänster (i v1.0)</li>
+      </ul>
+      <p>
+        Om vi i framtida versioner lägger till tredjepartstjänster uppdateras denna policy
+        och användare informeras via App Store-uppdateringsinformationen.
+      </p>
+    </section>
+
+    <!-- 8 -->
+    <section>
+      <h2>8. Datalagring och radering</h2>
+      <p>
+        Eftersom all data lagras lokalt på din enhet raderas den automatiskt när du avinstallerar Dvala.
+        Det finns inget konto att radera och inga servrar som håller din data.
+      </p>
+      <p>
+        Prenumerationsstatus hanteras av Apple. Om du avslutar din prenumeration hanteras
+        det via App Store-inställningarna på din enhet.
+      </p>
+    </section>
+
+    <!-- 9 -->
+    <section>
+      <h2>9. Dina rättigheter (GDPR)</h2>
+      <p>
+        Som användare baserad i EU har du rättigheter enligt dataskyddsförordningen (GDPR).
+        Eftersom Dvala inte samlar in personuppgifter till externa servrar är de flesta
+        GDPR-rättigheter uppfyllda per design. Du har rätt att:
+      </p>
+      <ul>
+        <li>Få tillgång till data vi lagrar om dig — i praktiken ingen, utöver vad som finns lokalt på din enhet</li>
+        <li>Begära radering — avinstallation av appen raderar all lokal data omedelbart</li>
+        <li>Invända mot behandling — vi behandlar inga personuppgifter att invända mot</li>
+        <li>Lämna klagomål till Integritetsskyddsmyndigheten (IMY) på <a href="https://www.imy.se" style="color:var(--gold)" target="_blank" rel="noopener">imy.se</a></li>
+      </ul>
+    </section>
+
+    <!-- 10 -->
+    <section>
+      <h2>10. Ändringar i denna policy</h2>
+      <p>
+        Om vi ändrar denna integritetspolicy uppdateras datumet "Senast uppdaterad" högst upp.
+        Väsentliga ändringar meddelas via App Store-uppdateringsnoteringar.
+        Fortsatt användning av appen efter en uppdatering innebär att du accepterar den reviderade policyn.
+      </p>
+    </section>
+
+    <!-- 11 -->
+    <section>
+      <h2>11. Kontakt</h2>
+      <p>Har du frågor om denna integritetspolicy eller hur Dvala hanterar data?</p>
+      <div class="contact-card">
+        <p><strong>CTC Solutions AB</strong></p>
+        <p>E-post: <a href="mailto:rasmus@ctcwiik.com">rasmus@ctcwiik.com</a></p>
+        <p>Webb: <a href="https://ctcwiik.com" target="_blank" rel="noopener">ctcwiik.com</a></p>
+        <p style="margin-top:12px; font-size:13px; color:var(--cream-dim);">
+          Vi svarar på integritetsförfrågningar inom 30 dagar.
+        </p>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- Footer -->
+  <footer>
+    <p>
+      © 2026 CTC Solutions AB &nbsp;·&nbsp;
+      <a href="https://ctcwiik.com">ctcwiik.com</a> &nbsp;·&nbsp;
+      Dvala — Sveriges tråkigaste app
+    </p>
+  </footer>
+
+</body>
+</html>
