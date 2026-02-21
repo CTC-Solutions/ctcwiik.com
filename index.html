@@ -3,31 +3,986 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>CTC Solutions AB</title>
+    <title>CTC Solutions AB — Mobilappar för den svenska marknaden</title>
+    <meta name="description" content="CTC Solutions AB utvecklar mobilappar för den svenska marknaden. Skapare av Dvala — Sveriges tråkigaste app för bättre sömn.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:ital,opsz,wght@0,9..40,300..700;1,9..40,300..700&display=swap" rel="stylesheet">
     <style>
+        :root {
+            --bg: #000000;
+            --surface: #0A0A0A;
+            --surface-elevated: #141414;
+            --surface-card: #1A1A1A;
+            --border: #1F1F1F;
+            --border-light: #2A2A2A;
+            --text-primary: #F5F1EB;
+            --text-secondary: #8A8A8A;
+            --text-muted: #5A5A5A;
+            --accent: #D4A843;
+            --accent-soft: #3D2E14;
+            --accent-glow: rgba(212, 168, 67, 0.08);
+            --natur: #1B4332;
+            --hantverk: #4A3728;
+            --data: #2C3E50;
+            --font-display: 'DM Serif Display', Georgia, serif;
+            --font-body: 'DM Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+            --radius-sm: 8px;
+            --radius-md: 12px;
+            --radius-lg: 20px;
+            --radius-xl: 28px;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        html {
+            scroll-behavior: smooth;
+            background: var(--bg);
+        }
+
         body {
-            background: #000;
-            color: #F5F1EB;
-            font-family: -apple-system, sans-serif;
+            font-family: var(--font-body);
+            background: var(--bg);
+            color: var(--text-primary);
+            line-height: 1.7;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+            overflow-x: hidden;
+        }
+
+        /* === NAVIGATION === */
+        nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 100;
+            padding: 1.25rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: rgba(0,0,0,0.85);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border-bottom: 1px solid transparent;
+            transition: border-color 0.3s ease;
+        }
+
+        nav.scrolled {
+            border-bottom-color: var(--border);
+        }
+
+        .nav-logo {
+            font-family: var(--font-display);
+            font-size: 1.15rem;
+            color: var(--text-primary);
+            text-decoration: none;
+            letter-spacing: 0.02em;
+        }
+
+        .nav-logo span {
+            color: var(--text-muted);
+            font-family: var(--font-body);
+            font-size: 0.8rem;
+            font-weight: 300;
+            margin-left: 0.75rem;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
+        }
+
+        .nav-links a {
+            color: var(--text-secondary);
+            text-decoration: none;
+            font-size: 0.875rem;
+            font-weight: 400;
+            transition: color 0.2s;
+            letter-spacing: 0.01em;
+        }
+
+        .nav-links a:hover { color: var(--text-primary); }
+
+        .nav-hamburger {
+            display: none;
+            background: none;
+            border: none;
+            cursor: pointer;
+            padding: 4px;
+        }
+
+        .nav-hamburger span {
+            display: block;
+            width: 22px;
+            height: 2px;
+            background: var(--text-primary);
+            margin: 5px 0;
+            border-radius: 2px;
+            transition: 0.3s;
+        }
+
+        /* === HERO SECTION === */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 8rem 2rem 6rem;
+            position: relative;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 600px;
+            height: 600px;
+            background: radial-gradient(ellipse, var(--accent-glow) 0%, transparent 70%);
+            pointer-events: none;
+        }
+
+        .hero-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.4rem 1rem;
+            background: var(--surface-elevated);
+            border: 1px solid var(--border-light);
+            border-radius: 100px;
+            font-size: 0.8rem;
+            color: var(--text-secondary);
+            margin-bottom: 2.5rem;
+            letter-spacing: 0.03em;
+        }
+
+        .hero-badge .dot {
+            width: 6px;
+            height: 6px;
+            background: var(--accent);
+            border-radius: 50%;
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.4; }
+        }
+
+        .hero h1 {
+            font-family: var(--font-display);
+            font-size: clamp(2.8rem, 6vw, 5rem);
+            font-weight: 400;
+            line-height: 1.15;
+            margin-bottom: 1.5rem;
+            max-width: 700px;
+        }
+
+        .hero h1 em {
+            font-style: italic;
+            color: var(--accent);
+        }
+
+        .hero-sub {
+            font-size: 1.1rem;
+            color: var(--text-secondary);
+            max-width: 520px;
+            margin-bottom: 3rem;
+            font-weight: 300;
+            line-height: 1.8;
+        }
+
+        .hero-cta {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.6rem;
+            padding: 0.9rem 2rem;
+            background: var(--accent);
+            color: #000;
+            border-radius: var(--radius-md);
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 0.95rem;
+            transition: all 0.25s ease;
+            letter-spacing: 0.01em;
+        }
+
+        .hero-cta:hover {
+            background: #e0b44e;
+            transform: translateY(-1px);
+        }
+
+        .hero-cta svg {
+            width: 18px;
+            height: 18px;
+        }
+
+        /* === SECTION SHARED === */
+        section {
+            padding: 6rem 2rem;
+            max-width: 1100px;
+            margin: 0 auto;
+        }
+
+        .section-label {
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 0.15em;
+            color: var(--accent);
+            margin-bottom: 1rem;
+            font-weight: 500;
+        }
+
+        .section-title {
+            font-family: var(--font-display);
+            font-size: clamp(2rem, 4vw, 2.8rem);
+            font-weight: 400;
+            line-height: 1.2;
+            margin-bottom: 1.25rem;
+        }
+
+        .section-desc {
+            font-size: 1.05rem;
+            color: var(--text-secondary);
+            max-width: 600px;
+            line-height: 1.8;
+            font-weight: 300;
+        }
+
+        /* === DVALA PRODUCT SECTION === */
+        #dvala {
+            padding-top: 4rem;
+        }
+
+        .product-showcase {
+            margin-top: 3.5rem;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1.5rem;
+        }
+
+        .product-hero-card {
+            grid-column: 1 / -1;
+            background: var(--surface-card);
+            border: 1px solid var(--border);
+            border-radius: var(--radius-xl);
+            padding: 3.5rem;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3rem;
+            align-items: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .product-hero-card::after {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -20%;
+            width: 400px;
+            height: 400px;
+            background: radial-gradient(ellipse, rgba(27,67,50,0.15) 0%, transparent 70%);
+            pointer-events: none;
+        }
+
+        .product-info h3 {
+            font-family: var(--font-display);
+            font-size: 2.2rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .product-tagline {
+            font-size: 1rem;
+            color: var(--accent);
+            margin-bottom: 1.25rem;
+            font-style: italic;
+            font-family: var(--font-display);
+        }
+
+        .product-description {
+            color: var(--text-secondary);
+            font-size: 0.95rem;
+            line-height: 1.8;
+            font-weight: 300;
+        }
+
+        .product-phone-frame {
+            display: flex;
+            justify-content: center;
+            position: relative;
+            z-index: 1;
+        }
+
+        .phone-mockup {
+            width: 220px;
+            height: 440px;
+            background: var(--bg);
+            border: 2px solid var(--border-light);
+            border-radius: 32px;
+            padding: 16px;
             display: flex;
             flex-direction: column;
             align-items: center;
             justify-content: center;
-            min-height: 100vh;
-            margin: 0;
-            text-align: center;
-            padding: 24px;
+            position: relative;
+            box-shadow: 0 24px 80px rgba(0,0,0,0.5);
         }
-        h1 { font-size: 28px; font-weight: 600; margin-bottom: 8px; }
-        p { color: #8A8A8A; font-size: 17px; margin: 4px 0; }
-        .gold { color: #D4A843; margin-top: 24px; font-size: 15px; }
+
+        .phone-notch {
+            position: absolute;
+            top: 8px;
+            width: 80px;
+            height: 22px;
+            background: var(--bg);
+            border-radius: 0 0 14px 14px;
+            border: 2px solid var(--border-light);
+            border-top: none;
+        }
+
+        .phone-screen {
+            width: 100%;
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 1rem;
+        }
+
+        .phone-screen .app-title {
+            font-family: var(--font-display);
+            font-size: 1.4rem;
+            color: var(--text-primary);
+        }
+
+        .phone-screen .app-subtitle {
+            font-size: 0.65rem;
+            color: var(--text-muted);
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+        }
+
+        .phone-stories {
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+            padding: 0 4px;
+            margin-top: 0.75rem;
+        }
+
+        .phone-story-item {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            padding: 6px 8px;
+            background: var(--surface-card);
+            border-radius: 8px;
+        }
+
+        .phone-story-dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            flex-shrink: 0;
+        }
+
+        .phone-story-text {
+            font-size: 0.55rem;
+            color: var(--text-secondary);
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        /* Feature cards */
+        .feature-card {
+            background: var(--surface-card);
+            border: 1px solid var(--border);
+            border-radius: var(--radius-lg);
+            padding: 2rem;
+            transition: border-color 0.2s;
+        }
+
+        .feature-card:hover {
+            border-color: var(--border-light);
+        }
+
+        .feature-icon {
+            width: 40px;
+            height: 40px;
+            border-radius: var(--radius-sm);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 1.25rem;
+            font-size: 1.1rem;
+        }
+
+        .feature-card h4 {
+            font-size: 1.05rem;
+            font-weight: 500;
+            margin-bottom: 0.5rem;
+        }
+
+        .feature-card p {
+            font-size: 0.875rem;
+            color: var(--text-secondary);
+            line-height: 1.7;
+            font-weight: 300;
+        }
+
+        .icon-natur { background: rgba(27,67,50,0.3); }
+        .icon-hantverk { background: rgba(74,55,40,0.3); }
+        .icon-data { background: rgba(44,62,80,0.3); }
+        .icon-sleep { background: var(--accent-soft); }
+
+        /* === ABOUT SECTION === */
+        #om-oss {
+            border-top: 1px solid var(--border);
+        }
+
+        .about-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            margin-top: 3rem;
+            align-items: start;
+        }
+
+        .about-text {
+            color: var(--text-secondary);
+            font-size: 0.95rem;
+            line-height: 1.9;
+            font-weight: 300;
+        }
+
+        .about-text p + p {
+            margin-top: 1.25rem;
+        }
+
+        .company-facts {
+            background: var(--surface-card);
+            border: 1px solid var(--border);
+            border-radius: var(--radius-lg);
+            padding: 2rem;
+        }
+
+        .company-facts h4 {
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 0.12em;
+            color: var(--text-muted);
+            margin-bottom: 1.5rem;
+            font-weight: 500;
+        }
+
+        .fact-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: baseline;
+            padding: 0.75rem 0;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .fact-row:last-child { border-bottom: none; }
+
+        .fact-label {
+            font-size: 0.85rem;
+            color: var(--text-muted);
+            font-weight: 400;
+        }
+
+        .fact-value {
+            font-size: 0.85rem;
+            color: var(--text-primary);
+            font-weight: 400;
+            text-align: right;
+        }
+
+        /* === CONTACT SECTION === */
+        #kontakt {
+            border-top: 1px solid var(--border);
+        }
+
+        .contact-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3rem;
+            margin-top: 3rem;
+        }
+
+        .contact-card {
+            background: var(--surface-card);
+            border: 1px solid var(--border);
+            border-radius: var(--radius-lg);
+            padding: 2rem;
+        }
+
+        .contact-card h4 {
+            font-size: 1rem;
+            font-weight: 500;
+            margin-bottom: 0.75rem;
+        }
+
+        .contact-card p {
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+            line-height: 1.7;
+            font-weight: 300;
+        }
+
+        .contact-card a {
+            color: var(--accent);
+            text-decoration: none;
+            transition: color 0.2s;
+        }
+
+        .contact-card a:hover {
+            color: #e0b44e;
+        }
+
+        /* === PRIVACY SECTION === */
+        #integritet {
+            border-top: 1px solid var(--border);
+        }
+
+        .privacy-content {
+            margin-top: 2.5rem;
+            max-width: 700px;
+        }
+
+        .privacy-content h3 {
+            font-size: 1.1rem;
+            font-weight: 500;
+            margin-top: 2rem;
+            margin-bottom: 0.75rem;
+        }
+
+        .privacy-content p {
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+            line-height: 1.8;
+            font-weight: 300;
+            margin-bottom: 1rem;
+        }
+
+        .privacy-content p:first-of-type {
+            margin-top: 0;
+        }
+
+        /* === FOOTER === */
+        footer {
+            border-top: 1px solid var(--border);
+            padding: 3rem 2rem;
+            text-align: center;
+        }
+
+        .footer-inner {
+            max-width: 1100px;
+            margin: 0 auto;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .footer-logo {
+            font-family: var(--font-display);
+            font-size: 1rem;
+            color: var(--text-primary);
+        }
+
+        .footer-links {
+            display: flex;
+            gap: 1.5rem;
+            list-style: none;
+        }
+
+        .footer-links a {
+            color: var(--text-muted);
+            text-decoration: none;
+            font-size: 0.8rem;
+            transition: color 0.2s;
+        }
+
+        .footer-links a:hover { color: var(--text-secondary); }
+
+        .footer-copy {
+            font-size: 0.75rem;
+            color: var(--text-muted);
+            margin-top: 0.5rem;
+        }
+
+        /* === MOBILE === */
+        @media (max-width: 768px) {
+            .nav-links { display: none; }
+            .nav-hamburger { display: block; }
+
+            .nav-links.open {
+                display: flex;
+                flex-direction: column;
+                position: absolute;
+                top: 100%;
+                left: 0;
+                right: 0;
+                background: rgba(0,0,0,0.95);
+                backdrop-filter: blur(20px);
+                padding: 1.5rem 2rem;
+                gap: 1.25rem;
+                border-bottom: 1px solid var(--border);
+            }
+
+            .hero { padding: 7rem 1.5rem 4rem; min-height: auto; }
+            .hero h1 { font-size: 2.4rem; }
+            .hero-sub { font-size: 1rem; }
+
+            section { padding: 4rem 1.5rem; }
+
+            .product-showcase { grid-template-columns: 1fr; }
+            .product-hero-card { grid-template-columns: 1fr; padding: 2rem; }
+            .product-phone-frame { margin-top: 1rem; }
+            .phone-mockup { width: 180px; height: 360px; }
+            .product-info h3 { font-size: 1.7rem; }
+
+            .about-grid { grid-template-columns: 1fr; gap: 2rem; }
+            .contact-grid { grid-template-columns: 1fr; gap: 1.5rem; }
+        }
+
+        /* Fade-in animations */
+        .fade-in {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.6s ease, transform 0.6s ease;
+        }
+
+        .fade-in.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
     </style>
 </head>
 <body>
-    <h1>CTC Solutions AB</h1>
-    <p>Vi bygger mobilappar för den svenska marknaden</p>
-    <p>Org.nr: [559316-0160]</p>
-    <p>rasmus@ctcwiik.com</p>
-    <p class="gold">Dvala — Sveriges tråkigaste app · Kommer snart</p>
+
+<!-- Navigation -->
+<nav id="navbar">
+    <a href="#" class="nav-logo">CTC Solutions AB <span>Stockholm</span></a>
+    <ul class="nav-links" id="navLinks">
+        <li><a href="#dvala">Dvala</a></li>
+        <li><a href="#om-oss">Om oss</a></li>
+        <li><a href="#kontakt">Kontakt</a></li>
+        <li><a href="#integritet">Integritet</a></li>
+    </ul>
+    <button class="nav-hamburger" id="hamburger" aria-label="Meny">
+        <span></span><span></span><span></span>
+    </button>
+</nav>
+
+<!-- Hero -->
+<header class="hero">
+    <div class="hero-badge">
+        <span class="dot"></span>
+        Svensk appstudio baserad i Stockholm
+    </div>
+    <h1>Vi bygger appar som förstår <em>Sverige</em></h1>
+    <p class="hero-sub">
+        CTC Solutions AB utvecklar mobilapplikationer för den svenska marknaden. 
+        Vår första produkt — Dvala — hjälper dig somna med Sveriges tråkigaste berättelser.
+    </p>
+    <a href="#dvala" class="hero-cta">
+        Upptäck Dvala
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="m6 9 6 6 6-6"/></svg>
+    </a>
+</header>
+
+<!-- Dvala Product Section -->
+<section id="dvala">
+    <p class="section-label fade-in">Vår produkt</p>
+    <h2 class="section-title fade-in">Dvala — Somna till Sverige</h2>
+    <p class="section-desc fade-in">
+        En sömnberättelse-app med avsiktligt tråkiga, kulturellt svenska berättelser 
+        som hjälper hjärnan att varva ner. Tänk dig att somna till sjörapporten, 
+        en skogsväg i Småland eller instruktioner om hur man travar ved.
+    </p>
+
+    <div class="product-showcase">
+        <!-- Main product card -->
+        <div class="product-hero-card fade-in">
+            <div class="product-info">
+                <h3>Dvala</h3>
+                <p class="product-tagline">Sveriges tråkigaste app</p>
+                <p class="product-description">
+                    Dvala erbjuder monotona, mysiga och specifikt svenska berättelser som hjälper dig somna. 
+                    Tre innehållskategorier — naturvandringar, hantverk och monoton uppläsning — lästa 
+                    med varma, lugna röster. Designad som ett mörkt, stilla rum för din nattrutin.
+                </p>
+            </div>
+            <div class="product-phone-frame">
+                <div class="phone-mockup">
+                    <div class="phone-notch"></div>
+                    <div class="phone-screen">
+                        <div class="app-subtitle">Somna till Sverige</div>
+                        <div class="app-title">Dvala</div>
+                        <div class="phone-stories">
+                            <div class="phone-story-item">
+                                <div class="phone-story-dot" style="background: var(--natur);"></div>
+                                <div class="phone-story-text">Skogspromenaden</div>
+                            </div>
+                            <div class="phone-story-item">
+                                <div class="phone-story-dot" style="background: var(--hantverk);"></div>
+                                <div class="phone-story-text">Hur man travar ved</div>
+                            </div>
+                            <div class="phone-story-item">
+                                <div class="phone-story-dot" style="background: var(--data);"></div>
+                                <div class="phone-story-text">Sjörapporten</div>
+                            </div>
+                            <div class="phone-story-item">
+                                <div class="phone-story-dot" style="background: var(--natur);"></div>
+                                <div class="phone-story-text">Tåget till Östersund</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Feature cards -->
+        <div class="feature-card fade-in">
+            <div class="feature-icon icon-natur">🌲</div>
+            <h4>Natur & Vandringar</h4>
+            <p>Sensoriska, långsamma resor genom svenska landskap. Skogsvägar i Småland, tågresor genom dalarna, dimmiga morgnar vid sjön. Extremt detaljrikt och helt konfliktfritt.</p>
+        </div>
+
+        <div class="feature-card fade-in">
+            <div class="feature-icon icon-hantverk">🪵</div>
+            <h4>Hantverk & Process</h4>
+            <p>Kärleksfulla genomgångar av hantverk och manuella processer. Att trava ved, olja in en ekskiva, måla en Dalahäst penseldrag för penseldrag. Meditativt och metodiskt.</p>
+        </div>
+
+        <div class="feature-card fade-in">
+            <div class="feature-icon icon-data">📊</div>
+            <h4>Monoton Uppläsning</h4>
+            <p>Rytmisk läsning av data och regelverk — meningslöst men lugnande. Sjörapporten, befolkningsstatistik från 1962, sjövägsreglerna. Den svenska traditionen av att somna till monotona röster.</p>
+        </div>
+
+        <div class="feature-card fade-in">
+            <div class="feature-icon icon-sleep">🌙</div>
+            <h4>Sömnoptimerad design</h4>
+            <p>OLED-svart gränssnitt, sömntimermed mjuk uttoningseffekt, bakgrundsuppspelning och låsskärmskontroller. Allt designat för mörka sovrum och nattliga rutiner.</p>
+        </div>
+    </div>
+</section>
+
+<!-- About Section -->
+<section id="om-oss">
+    <p class="section-label fade-in">Om oss</p>
+    <h2 class="section-title fade-in">Svenskt hantverk, digital form</h2>
+
+    <div class="about-grid">
+        <div class="about-text fade-in">
+            <p>
+                CTC Solutions AB är en svensk appstudio baserad i Stockholm. Vi grundades med 
+                övertygelsen att de bästa digitala produkterna förstår sin publik på djupet — kulturellt, 
+                språkligt och emotionellt.
+            </p>
+            <p>
+                Vår första produkt, Dvala, föddes ur en enkel insikt: miljontals svenskar somnar redan 
+                till monotona ljud — sjörapporten, tågljud, regn mot plåttak. Vi produktifierar den 
+                instinkten med professionellt producerade sömnberättelser som är avsiktligt tråkiga, 
+                genuint svenska och kärleksfullt skapade.
+            </p>
+            <p>
+                Vi tror på att bygga med omsorg framför hastighet. Varje berättelse skrivs och granskas 
+                noggrant för att uppnå rätt tempo, rätt detaljnivå och rätt känsla. 
+                Ingen AI-genererad slentrian — varje manus passerar ett svenskt kvalitetsgrind.
+            </p>
+        </div>
+
+        <div class="company-facts fade-in">
+            <h4>Bolagsinformation</h4>
+            <div class="fact-row">
+                <span class="fact-label">Bolagsnamn</span>
+                <span class="fact-value">CTC Solutions AB</span>
+            </div>
+            <div class="fact-row">
+                <span class="fact-label">Organisationsnummer</span>
+                <span class="fact-value">559316-0160</span>
+            </div>
+            <div class="fact-row">
+                <span class="fact-label">Bolagsform</span>
+                <span class="fact-value">Aktiebolag</span>
+            </div>
+            <div class="fact-row">
+                <span class="fact-label">Säte</span>
+                <span class="fact-value">Stockholm, Sverige</span>
+            </div>
+            <div class="fact-row">
+                <span class="fact-label">Verksamhet</span>
+                <span class="fact-value">Apputveckling</span>
+            </div>
+            <div class="fact-row">
+                <span class="fact-label">Plattform</span>
+                <span class="fact-value">iOS (native SwiftUI)</span>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Contact Section -->
+<section id="kontakt">
+    <p class="section-label fade-in">Kontakt</p>
+    <h2 class="section-title fade-in">Hör av dig</h2>
+    <p class="section-desc fade-in">
+        Har du frågor om Dvala, vill samarbeta, eller har feedback? Vi svarar gärna.
+    </p>
+
+    <div class="contact-grid">
+        <div class="contact-card fade-in">
+            <h4>Allmänna frågor</h4>
+            <p>
+                Kontakta oss på<br>
+                <a href="mailto:rasmus@ctcwiik.com">rasmus@ctcwiik.com</a>
+            </p>
+        </div>
+
+        <div class="contact-card fade-in">
+            <h4>Support</h4>
+            <p>
+                Behöver du hjälp med appen eller ditt konto?<br>
+                <a href="mailto:support@ctcwiik.com">support@ctcwiik.com</a>
+            </p>
+        </div>
+
+        <div class="contact-card fade-in">
+            <h4>Press & Samarbeten</h4>
+            <p>
+                Intresserad av att skriva om Dvala eller utforska samarbeten?<br>
+                <a href="mailto:rasmus@ctcwiik.com">rasmus@ctcwiik.com</a>
+            </p>
+        </div>
+
+        <div class="contact-card fade-in">
+            <h4>Adress</h4>
+            <p>
+                CTC Solutions AB<br>
+                Stockholm, Sverige<br>
+                Org.nr: 559316-0160
+            </p>
+        </div>
+    </div>
+</section>
+
+<!-- Privacy Section -->
+<section id="integritet">
+    <p class="section-label fade-in">Juridiskt</p>
+    <h2 class="section-title fade-in">Integritetspolicy</h2>
+    <p class="section-desc fade-in">Senast uppdaterad: februari 2025</p>
+
+    <div class="privacy-content fade-in">
+        <h3>Introduktion</h3>
+        <p>
+            CTC Solutions AB ("vi", "oss", "vår") respekterar din integritet. Denna policy 
+            beskriver hur vi hanterar information i samband med Dvala-appen och våra tjänster.
+        </p>
+
+        <h3>Information vi samlar in</h3>
+        <p>
+            Dvala är designad med integritet i åtanke. För MVP-versionen samlar vi in minimal 
+            information. Appinställningar, favoriter och uppspelningspositioner lagras lokalt 
+            på din enhet med hjälp av iOS inbyggda lagring. Vi samlar inte in personuppgifter, 
+            spårningsdata eller analysdata i den initiala versionen.
+        </p>
+
+        <h3>Prenumerationer</h3>
+        <p>
+            Prenumerationer hanteras helt genom Apples App Store. Vi har inte tillgång till dina 
+            betalningsuppgifter. Apple hanterar all betalningsbehandling i enlighet med deras 
+            egna villkor och integritetspolicy.
+        </p>
+
+        <h3>Delning av data</h3>
+        <p>
+            Vi säljer, hyr eller delar inte ut personuppgifter till tredje part. Vi använder inga 
+            tredjepartsanalysverktyg eller annonsnätverk i appen.
+        </p>
+
+        <h3>Lagring av data</h3>
+        <p>
+            All appdata lagras lokalt på din enhet. Det finns ingen molnsynkronisering 
+            eller extern lagring i den nuvarande versionen. Om vi inför molnfunktioner i 
+            framtiden kommer vi att uppdatera denna policy och informera dig.
+        </p>
+
+        <h3>Dina rättigheter</h3>
+        <p>
+            Enligt GDPR och svensk dataskyddslagstiftning har du rätt att begära tillgång till, 
+            rättelse av eller radering av eventuella personuppgifter vi behandlar. Eftersom Dvala 
+            i sin nuvarande form inte samlar in personuppgifter, lagras all information lokalt 
+            och kan raderas genom att avinstallera appen.
+        </p>
+
+        <h3>Kontakt</h3>
+        <p>
+            Har du frågor om denna integritetspolicy? Kontakta oss på 
+            <a href="mailto:rasmus@ctcwiik.com" style="color: var(--accent); text-decoration: none;">rasmus@ctcwiik.com</a>.
+        </p>
+
+        <h3>Ändringar</h3>
+        <p>
+            Vi kan uppdatera denna policy i samband med nya funktioner eller juridiska krav. 
+            Väsentliga ändringar meddelas via appen.
+        </p>
+    </div>
+</section>
+
+<!-- Footer -->
+<footer>
+    <div class="footer-inner">
+        <div class="footer-logo">CTC Solutions AB</div>
+        <ul class="footer-links">
+            <li><a href="#dvala">Dvala</a></li>
+            <li><a href="#om-oss">Om oss</a></li>
+            <li><a href="#kontakt">Kontakt</a></li>
+            <li><a href="#integritet">Integritetspolicy</a></li>
+        </ul>
+        <p class="footer-copy">© 2025 CTC Solutions AB · Org.nr 559316-0160 · Stockholm, Sverige</p>
+    </div>
+</footer>
+
+<script>
+    // Nav scroll effect
+    const navbar = document.getElementById('navbar');
+    window.addEventListener('scroll', () => {
+        navbar.classList.toggle('scrolled', window.scrollY > 50);
+    });
+
+    // Mobile menu
+    const hamburger = document.getElementById('hamburger');
+    const navLinks = document.getElementById('navLinks');
+    hamburger.addEventListener('click', () => {
+        navLinks.classList.toggle('open');
+    });
+    navLinks.querySelectorAll('a').forEach(link => {
+        link.addEventListener('click', () => navLinks.classList.remove('open'));
+    });
+
+    // Fade-in on scroll
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('visible');
+            }
+        });
+    }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
+
+    document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+</script>
+
 </body>
 </html>
